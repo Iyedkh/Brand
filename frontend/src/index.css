@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-accent: #717171;
+  --color-background: #ffffff;
+  --color-border: #e5e5e5;
+  
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Outfit", sans-serif;
+
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-primary font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-primary uppercase;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-black text-white px-8 py-3 uppercase text-sm tracking-widest hover:bg-neutral-800 transition-colors duration-300;
+  }
+  
+  .btn-secondary {
+    @apply border border-black text-black px-8 py-3 uppercase text-sm tracking-widest hover:bg-black hover:text-white transition-all duration-300;
+  }
+
+  .nav-link {
+    @apply text-sm uppercase tracking-widest hover:opacity-100 opacity-70 transition-opacity duration-300;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-neutral-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-300 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-400;
+}
