@@ -40,7 +40,6 @@ const Navbar = () => {
         <div className="hidden lg:flex space-x-8">
           <Link to="/shop?category=Women" className="nav-link">Women</Link>
           <Link to="/shop?category=Men" className="nav-link">Men</Link>
-          <Link to="/shop?category=Kids" className="nav-link">Kids</Link>
         </div>
 
         {/* Logo */}
@@ -103,7 +102,6 @@ const Navbar = () => {
         <div className="flex flex-col p-10 space-y-8">
           <Link to="/shop?category=Women" className="text-2xl uppercase tracking-widest" onClick={() => setIsMenuOpen(false)}>Women</Link>
           <Link to="/shop?category=Men" className="text-2xl uppercase tracking-widest" onClick={() => setIsMenuOpen(false)}>Men</Link>
-          <Link to="/shop?category=Kids" className="text-2xl uppercase tracking-widest" onClick={() => setIsMenuOpen(false)}>Kids</Link>
           <hr className="border-neutral-100" />
           <Link to="/profile" className="text-lg uppercase tracking-widest" onClick={() => setIsMenuOpen(false)}>My Account</Link>
         </div>

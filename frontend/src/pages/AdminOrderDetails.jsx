@@ -121,7 +121,7 @@ const AdminOrderDetails = () => {
                              </div>
                           </td>
                           <td className="px-6 py-4 text-[10px] text-center">{item.qty}</td>
-                          <td className="px-6 py-4 text-[10px] text-right font-medium">${item.price}</td>
+                          <td className="px-6 py-4 text-[10px] text-right font-medium">{item.price} TND</td>
                        </tr>
                     ))}
                  </tbody>
@@ -157,15 +157,15 @@ const AdminOrderDetails = () => {
               <div className="pt-10 border-t border-neutral-50 space-y-4">
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-400">
                     <span>Subtotal</span>
-                    <span>${order.itemsPrice.toFixed(2)}</span>
+                    <span>{order.itemsPrice.toFixed(2)} TND</span>
                  </div>
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-400">
                     <span>Shipping</span>
-                    <span>${order.shippingPrice.toFixed(2)}</span>
+                    <span>{order.shippingPrice.toFixed(2)} TND</span>
                  </div>
                  <div className="flex justify-between text-sm uppercase tracking-widest font-bold">
                     <span>Grand Total</span>
-                    <span>${order.totalPrice.toFixed(2)}</span>
+                    <span>{order.totalPrice.toFixed(2)} TND</span>
                  </div>
               </div>
            </div>

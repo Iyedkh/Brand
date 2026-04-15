@@ -84,7 +84,7 @@ const AdminOrders = () => {
                   <td className="px-6 py-4 font-mono text-[10px] text-neutral-400">#{order._id.slice(-8)}</td>
                   <td className="px-6 py-4 font-medium text-black">{order.user?.username || 'Guest'}</td>
                   <td className="px-6 py-4">{new Date(order.createdAt).toLocaleDateString()}</td>
-                  <td className="px-6 py-4 font-medium text-black">${order.totalPrice.toFixed(2)}</td>
+                  <td className="px-6 py-4 font-medium text-black">{order.totalPrice.toFixed(2)} TND</td>
                   <td className="px-6 py-4">
                     {order.isPaid ? (
                        <span className="flex items-center text-emerald-500"><CheckCircle size={14} className="mr-2" /> {order.paidAt.substring(0, 10)}</span>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import api from '../api';
 import useCartStore from '../store/useCartStore';
-import { Heart, Plus, Minus, Star, ShieldCheck, Truck, RefreshCw } from 'lucide-react';
+import { Heart, Plus, Minus, Star, ShieldCheck, Truck, RefreshCw, ShoppingBag } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { getImageUrl } from '../utils/formatUrl';
+import PageTransition from '../components/PageTransition';
+import { Skeleton } from '../components/Skeleton';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -48,11 +50,42 @@ const ProductDetail = () => {
     });
   };
 
-  if (loading) return <div className="h-screen flex items-center justify-center">Loading...</div>;
-  if (!product) return <div className="h-screen flex items-center justify-center">Product Not Found</div>;
+  if (loading) {
+    return (
+      <PageTransition className="pt-32 pb-20 container mx-auto px-6">
+        <div className="flex flex-col lg:flex-row gap-16">
+          <div className="lg:w-7/12 grid grid-cols-1 md:grid-cols-2 gap-4">
+             <Skeleton className="aspect-3/4" />
+             <Skeleton className="aspect-3/4 hidden md:block" />
+          </div>
+          <div className="lg:w-5/12 space-y-6">
+             <Skeleton className="h-10 w-3/4" />
+             <Skeleton className="h-6 w-1/4" />
+             <Skeleton className="h-4 w-1/2" />
+             <div className="pt-8 space-y-4">
+               <Skeleton className="h-12 w-full" />
+               <Skeleton className="h-12 w-full" />
+               <Skeleton className="h-14 w-full" />
+             </div>
+          </div>
+        </div>
+      </PageTransition>
+    );
+  }
+
+  if (!product) {
+    return (
+      <PageTransition className="h-screen flex flex-col items-center justify-center text-center px-6">
+        <ShoppingBag size={48} className="text-neutral-200 mb-6" />
+        <h2 className="text-3xl font-display uppercase tracking-widest mb-4">Product Not Found</h2>
+        <p className="text-neutral-400 text-sm mb-8">The item you are looking for is no longer available or the link is incorrect.</p>
+        <Link to="/shop" className="btn-primary">Return to Shop</Link>
+      </PageTransition>
+    );
+  }
 
   return (
-    <div className="pt-32 pb-20 container mx-auto px-6">
+    <PageTransition className="pt-32 pb-20 container mx-auto px-6">
       <div className="flex flex-col lg:flex-row gap-16">
         {/* Images Grid */}
         <div className="lg:w-7/12 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -67,7 +100,7 @@ const ProductDetail = () => {
         <div className="lg:w-5/12 lg:sticky lg:top-32 h-fit">
           <div className="border-b border-neutral-100 pb-8">
             <h1 className="text-3xl font-display font-light uppercase tracking-tight">{product.name}</h1>
-            <p className="text-xl mt-4 font-light">${product.price}</p>
+            <p className="text-xl mt-4 font-light">{product.price} TND</p>
             <div className="flex items-center mt-4 space-x-1">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={14} fill={i < Math.floor(product.rating) ? "black" : "none"} className={i < Math.floor(product.rating) ? "text-black" : "text-neutral-200"} />
@@ -159,7 +192,7 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-    </div>
+    </PageTransition>
   );
 };
 

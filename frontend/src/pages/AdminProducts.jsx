@@ -102,7 +102,7 @@ const AdminProducts = () => {
                   </td>
                   <td className="px-6 py-4 font-medium text-black">{product.name}</td>
                   <td className="px-6 py-4">{product.category}</td>
-                  <td className="px-6 py-4">${product.price}</td>
+                  <td className="px-6 py-4">{product.price} TND</td>
                   <td className="px-6 py-4">
                     <span className={product.stock < 5 ? 'text-red-500 font-bold' : ''}>
                       {product.stock}

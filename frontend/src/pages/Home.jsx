@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
+import { ProductSkeleton } from '../components/Skeleton';
+import PageTransition from '../components/PageTransition';
 import api from '../api';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -24,7 +26,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="pb-20">
+    <PageTransition className="pb-20">
       <Hero />
 
       {/* Featured Collections */}
@@ -40,13 +42,9 @@ const Home = () => {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
             {[1, 2, 3, 4].map((n) => (
-              <div key={n} className="animate-pulse">
-                <div className="bg-neutral-100 aspect-3/4 mb-4"></div>
-                <div className="h-4 bg-neutral-100 w-3/4 mb-2"></div>
-                <div className="h-4 bg-neutral-100 w-1/4"></div>
-              </div>
+              <ProductSkeleton key={n} />
             ))}
           </div>
         ) : (
@@ -74,11 +72,10 @@ const Home = () => {
       </section>
 
       {/* Categories Grid */}
-      <section className="container mx-auto px-6 mt-32 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="container mx-auto px-6 mt-32 grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
           { name: 'Women', img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=2070' },
-          { name: 'Men', img: 'https://static.bershka.net/assets/public/a24f/1f02/8cfd47e2bf67/e87f0f0f22a7/01307156401-p/01307156401-p.jpg?ts=1772550522057&w=1920' },
-          { name: 'Kids', img: 'https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?auto=format&fit=crop&q=80&w=2070' }
+          { name: 'Men', img: 'https://static.bershka.net/assets/public/a24f/1f02/8cfd47e2bf67/e87f0f0f22a7/01307156401-p/01307156401-p.jpg?ts=1772550522057&w=1920' }
         ].map(cat => (
           <Link to={`/shop?category=${cat.name}`} key={cat.name} className="relative aspect-4/5 overflow-hidden group">
             <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -89,7 +86,7 @@ const Home = () => {
           </Link>
         ))}
       </section>
-    </div>
+    </PageTransition>
   );
 };
 

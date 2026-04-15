@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
             {product.category}
           </p>
         </div>
-        <p className="text-sm font-light">${product.price}</p>
+        <p className="text-sm font-light">{product.price} TND</p>
       </div>
 
       {/* Quick Sizes (Optional) */}

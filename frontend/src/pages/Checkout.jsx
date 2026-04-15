@@ -158,7 +158,7 @@ const Checkout = () => {
                        <div className="flex-1 flex flex-col justify-between">
                           <div className="flex justify-between items-start">
                              <h4 className="text-[10px] uppercase tracking-widest w-2/3">{item.name}</h4>
-                             <span className="text-[10px]">${item.price}</span>
+                             <span className="text-[10px]">{item.price} TND</span>
                           </div>
                           <div className="flex justify-between text-[9px] uppercase tracking-tighter text-neutral-400">
                              <span>Size: {item.size} | Qty: {item.qty}</span>
@@ -171,16 +171,16 @@ const Checkout = () => {
               <div className="space-y-4 pt-4 border-t border-neutral-100">
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-500">
                     <span>Subtotal</span>
-                    <span>${itemsPrice.toFixed(2)}</span>
+                    <span>{itemsPrice.toFixed(2)} TND</span>
                  </div>
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-500">
                     <span>Shipping</span>
-                    <span>{shippingPrice === 0 ? 'FREE' : `$${shippingPrice.toFixed(2)}`}</span>
+                    <span>{shippingPrice === 0 ? 'FREE' : `${shippingPrice.toFixed(2)} TND`}</span>
                  </div>
                  <hr className="border-neutral-50" />
                  <div className="flex justify-between text-xl font-display uppercase tracking-tight">
                     <span>Total</span>
-                    <span>${totalPrice.toFixed(2)}</span>
+                    <span>{totalPrice.toFixed(2)} TND</span>
                  </div>
               </div>
 

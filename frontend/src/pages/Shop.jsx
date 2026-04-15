@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import api from '../api';
 import ProductCard from '../components/ProductCard';
 import { Filter, ChevronDown } from 'lucide-react';
+import PageTransition from '../components/PageTransition';
+import { ProductSkeleton } from '../components/Skeleton';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -38,7 +40,7 @@ const Shop = () => {
   }, [currentPage, keyword, category]);
 
   return (
-    <div className="pt-32 pb-20 container mx-auto px-6">
+    <PageTransition className="pt-32 pb-20 container mx-auto px-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-neutral-100 pb-8">
         <div>
           <h1 className="text-4xl font-display font-light uppercase">
@@ -60,13 +62,9 @@ const Shop = () => {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16">
           {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
-             <div key={n} className="animate-pulse">
-                <div className="bg-neutral-100 aspect-3/4 mb-4"></div>
-                <div className="h-4 bg-neutral-100 w-3/4 mb-2"></div>
-                <div className="h-4 bg-neutral-100 w-1/4"></div>
-             </div>
+            <ProductSkeleton key={n} />
           ))}
         </div>
       ) : products.length === 0 ? (
@@ -99,7 +97,7 @@ const Shop = () => {
           )}
         </>
       )}
-    </div>
+    </PageTransition>
   );
 };
 

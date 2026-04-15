@@ -4,6 +4,7 @@ import useCartStore from '../store/useCartStore';
 import { Trash2, ShoppingBag, Plus, Minus, ArrowRight } from 'lucide-react';
 import { getImageUrl } from '../utils/formatUrl';
 import useAuthStore from '../store/useAuthStore';
+import PageTransition from '../components/PageTransition';
 
 const Cart = () => {
   const { cartItems, addToCart, removeFromCart } = useCartStore();
@@ -14,19 +15,19 @@ const Cart = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="pt-40 pb-20 container mx-auto px-6 text-center">
+      <PageTransition className="pt-40 pb-20 container mx-auto px-6 flex flex-col items-center justify-center min-h-[70vh]">
         <ShoppingBag size={48} className="mx-auto text-neutral-200 mb-6" />
         <h1 className="text-3xl font-display uppercase tracking-widest mb-4">Your bag is empty</h1>
         <p className="text-neutral-400 text-xs uppercase tracking-widest mb-10">Look around and find something you like</p>
-        <Link to="/shop" className="inline-block bg-black text-white px-12 py-4 uppercase text-xs tracking-widest hover:bg-neutral-800 transition-colors">
+        <Link to="/shop" className="btn-primary">
           Go to Shop
         </Link>
-      </div>
+      </PageTransition>
     );
   }
 
   return (
-    <div className="pt-32 pb-20 container mx-auto px-6">
+    <PageTransition className="pt-32 pb-20 container mx-auto px-6">
       <h1 className="text-4xl font-display font-light uppercase border-b border-neutral-100 pb-8 mb-12">Shopping Bag ({cartItems.length})</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
@@ -47,7 +48,7 @@ const Cart = () => {
                            <span>Color: {item.color}</span>
                         </div>
                      </div>
-                     <p className="text-sm font-light">${item.price}</p>
+                     <p className="text-sm font-light">{item.price} TND</p>
                   </div>
 
                   <div className="flex justify-between items-center mt-auto">
@@ -87,7 +88,7 @@ const Cart = () => {
               <div className="space-y-4">
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-500">
                     <span>Subtotal</span>
-                    <span>${subtotal}</span>
+                    <span>{subtotal} TND</span>
                  </div>
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-500">
                     <span>Estimated Shipping</span>
@@ -95,12 +96,12 @@ const Cart = () => {
                  </div>
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-500">
                     <span>Tax</span>
-                    <span>$0.00</span>
+                    <span>0.00 TND</span>
                  </div>
                  <hr className="border-neutral-200" />
                  <div className="flex justify-between text-sm uppercase tracking-widest font-medium">
                     <span>Total</span>
-                    <span>${subtotal}</span>
+                    <span>{subtotal} TND</span>
                  </div>
               </div>
 
@@ -120,7 +121,7 @@ const Cart = () => {
            </div>
         </div>
       </div>
-    </div>
+    </PageTransition>
   );
 };
 

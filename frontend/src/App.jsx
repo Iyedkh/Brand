@@ -18,6 +18,7 @@ import AdminProductEdit from './pages/AdminProductEdit';
 import AdminOrders from './pages/AdminOrders';
 import AdminOrderDetails from './pages/AdminOrderDetails';
 import AdminCategories from './pages/AdminCategories';
+import AdminUsers from './pages/AdminUsers';
 import AdminRoute from './components/AdminRoute';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
               <Route path="orders" element={<AdminOrders />} />
               <Route path="order/:id" element={<AdminOrderDetails />} />
               <Route path="categories" element={<AdminCategories />} />
+              <Route path="users" element={<AdminUsers />} />
             </Route>
             {/* Profile Routes would go here */}
           </Routes>

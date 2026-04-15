@@ -131,12 +131,11 @@ const AdminProductEdit = () => {
                    <option value="">SELECT CATEGORY</option>
                    <option value="Women">WOMEN</option>
                    <option value="Men">MEN</option>
-                   <option value="Kids">KIDS</option>
                    {categories.map(c => <option key={c._id} value={c.name}>{c.name.toUpperCase()}</option>)}
                  </select>
               </div>
               <div className="space-y-2">
-                 <label className="text-[10px] uppercase tracking-widest opacity-50">Price ($)</label>
+                 <label className="text-[10px] uppercase tracking-widest opacity-50">Price (TND)</label>
                  <input 
                    type="number" 
                    className="w-full border-b border-neutral-100 py-3 focus:outline-none focus:border-black"

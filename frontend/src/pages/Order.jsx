@@ -89,7 +89,7 @@ const Order = () => {
                             <p className="text-[10px] uppercase tracking-widest font-medium">{item.name}</p>
                             <p className="text-[9px] text-neutral-400 mt-1 uppercase tracking-tighter">Size: {item.size} | Qty: {item.qty}</p>
                           </div>
-                          <p className="text-[10px] font-medium">${item.price}</p>
+                          <p className="text-[10px] font-medium">{item.price} TND</p>
                        </div>
                     </div>
                  ))}
@@ -119,16 +119,16 @@ const Order = () => {
               <div className="bg-neutral-50 p-6 space-y-3">
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-500">
                     <span>Items Subtotal</span>
-                    <span>${order.itemsPrice.toFixed(2)}</span>
+                    <span>{order.itemsPrice.toFixed(2)} TND</span>
                  </div>
                  <div className="flex justify-between text-[10px] uppercase tracking-widest text-neutral-500">
                     <span>Shipping Fee</span>
-                    <span>{order.shippingPrice === 0 ? 'FREE' : `$${order.shippingPrice.toFixed(2)}`}</span>
+                    <span>{order.shippingPrice === 0 ? 'FREE' : `${order.shippingPrice.toFixed(2)} TND`}</span>
                  </div>
                  <hr className="border-neutral-200" />
                  <div className="flex justify-between text-sm uppercase tracking-widest font-bold">
                     <span>Grand Total</span>
-                    <span>${order.totalPrice.toFixed(2)}</span>
+                    <span>{order.totalPrice.toFixed(2)} TND</span>
                  </div>
               </div>
            </div>
