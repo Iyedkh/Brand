@@ -8,9 +8,9 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1539109132314-d4a8c62e40dc?auto=format&fit=crop&q=80&w=1974"
+          src="https://images.squarespace-cdn.com/content/v1/5696c4c840667ada3219e632/1457332117591-JG996EK5Z84XI42UXZEN/header+new.jpg?format=2500w"
           alt="Fashion Hero"
-          className="w-full h-full object-cover scale-105"
+          className="w-full h-full object-cover scale-105 mt-22"
         />
         <div className="absolute inset-0 bg-black/10 transition-opacity hover:opacity-20 duration-700"></div>
       </div>
@@ -30,7 +30,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-6xl md:text-8xl font-display font-light mb-8 uppercase tracking-tight drop-shadow-lg"
+          className="text-6xl md:text-8xl font-display font-light mb-8 uppercase tracking-tight drop-shadow-lg text-amber-50"
         >
           Effortless <br /> Elegance
         </motion.h1>

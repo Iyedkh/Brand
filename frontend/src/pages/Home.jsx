@@ -59,7 +59,7 @@ const Home = () => {
       </section>
 
       {/* Campaign Banner */}
-      <section className="mt-32 relative h-[500px] overflow-hidden group">
+      <section className="mt-32 relative h-500px overflow-hidden group">
         <img 
           src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=2070" 
           alt="Campaign" 
@@ -77,7 +77,7 @@ const Home = () => {
       <section className="container mx-auto px-6 mt-32 grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
           { name: 'Women', img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=2070' },
-          { name: 'Men', img: 'https://images.unsplash.com/photo-1488161628813-24479cdc194c?auto=format&fit=crop&q=80&w=1964' },
+          { name: 'Men', img: 'https://static.bershka.net/assets/public/a24f/1f02/8cfd47e2bf67/e87f0f0f22a7/01307156401-p/01307156401-p.jpg?ts=1772550522057&w=1920' },
           { name: 'Kids', img: 'https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?auto=format&fit=crop&q=80&w=2070' }
         ].map(cat => (
           <Link to={`/shop?category=${cat.name}`} key={cat.name} className="relative aspect-4/5 overflow-hidden group">
