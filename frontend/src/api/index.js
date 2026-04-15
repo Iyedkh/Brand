@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: process.env.NODE_ENV === 'production'
+    ? 'brand-production-f803.up.railway.app' 
+    : 'http://localhost:5000',
 });
 
 api.interceptors.request.use((config) => {
