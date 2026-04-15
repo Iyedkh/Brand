@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: process.env.NODE_ENV === 'production'
-    ? 'brand-production-f803.up.railway.app' 
+    ? 'https://brand-production-f803.up.railway.app' 
     : 'http://localhost:5000',
 });
 
