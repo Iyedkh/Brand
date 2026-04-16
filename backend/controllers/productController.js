@@ -68,7 +68,7 @@ const createProduct = asyncHandler(async (req, res) => {
     user: req.user._id,
     images: images || ['/images/sample.jpg'],
     category,
-    sizes: sizes || ['S', 'M', 'L', 'XL'],
+    sizes: sizes || [{ size: 'S', stock: 0 }, { size: 'M', stock: 0 }, { size: 'L', stock: 0 }, { size: 'XL', stock: 0 }],
     colors: colors || ['Black'],
     stock: stock || 0,
     numReviews: 0,

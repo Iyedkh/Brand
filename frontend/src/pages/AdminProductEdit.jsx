@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Upload, X, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Upload, X, ChevronRight, Plus } from 'lucide-react';
 import api from '../api';
 import toast from 'react-hot-toast';
 import { getImageUrl } from '../utils/formatUrl';
@@ -17,7 +17,7 @@ const AdminProductEdit = () => {
     category: '',
     stock: 0,
     description: '',
-    sizes: ['S', 'M', 'L', 'XL'],
+    sizes: [{ size: 'S', stock: 0 }, { size: 'M', stock: 0 }, { size: 'L', stock: 0 }, { size: 'XL', stock: 0 }],
     colors: ['Black']
   });
   
@@ -35,7 +35,8 @@ const AdminProductEdit = () => {
           const { data: productData } = await api.get(`/api/products/${id}`);
           setFormData({
             ...productData,
-            images: productData.images || []
+            images: productData.images || [],
+            sizes: productData.sizes?.map(s => typeof s === 'string' ? { size: s, stock: 0 } : s) || []
           });
         }
         setLoading(false);
@@ -144,16 +145,56 @@ const AdminProductEdit = () => {
                    required
                  />
               </div>
-              <div className="space-y-2">
-                 <label className="text-[10px] uppercase tracking-widest opacity-50">Stock Quantity</label>
-                 <input 
-                   type="number" 
-                   className="w-full border-b border-neutral-100 py-3 focus:outline-none focus:border-black"
-                   value={formData.stock}
-                   onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                   required
-                 />
-              </div>
+           </div>
+
+           {/* Sizes & Stock */}
+           <div className="space-y-4 pt-4 border-t border-neutral-100">
+               <div className="flex justify-between items-center">
+                   <label className="text-[10px] uppercase tracking-widest opacity-50">Sizes & Stock</label>
+                   <button type="button" onClick={() => setFormData({...formData, sizes: [...formData.sizes, { size: '', stock: 0 }]})} className="text-[10px] flex items-center gap-1 uppercase tracking-widest hover:text-black hover:opacity-100 opacity-50 transition-opacity">
+                       <Plus size={12} /> Add Size
+                   </button>
+               </div>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {formData.sizes.map((item, idx) => (
+                     <div key={idx} className="flex space-x-4 items-center bg-neutral-50 px-4 py-2 border border-neutral-100">
+                        <input
+                           type="text"
+                           placeholder="Size (e.g. XL)"
+                           className="w-1/2 bg-transparent border-b border-neutral-200 py-2 focus:outline-none focus:border-black text-sm"
+                           value={item.size}
+                           onChange={(e) => {
+                               const newSizes = [...formData.sizes];
+                               newSizes[idx].size = e.target.value;
+                               setFormData({...formData, sizes: newSizes});
+                           }}
+                           required
+                        />
+                        <input
+                           type="number"
+                           placeholder="Stock"
+                           className="w-1/2 bg-transparent border-b border-neutral-200 py-2 focus:outline-none focus:border-black text-sm"
+                           min="0"
+                           value={item.stock}
+                           onChange={(e) => {
+                               const newSizes = [...formData.sizes];
+                               newSizes[idx].stock = Number(e.target.value);
+                               setFormData({...formData, sizes: newSizes});
+                           }}
+                           required
+                        />
+                        <button type="button" onClick={() => {
+                            const newSizes = formData.sizes.filter((_, i) => i !== idx);
+                            setFormData({...formData, sizes: newSizes});
+                        }} className="p-2 hover:bg-neutral-200 rounded-full transition-colors text-neutral-400 hover:text-black">
+                            <X size={14} />
+                        </button>
+                     </div>
+                  ))}
+               </div>
+               <div className="text-[10px] text-neutral-400 uppercase tracking-widest">
+                   Total Stock: {formData.sizes.reduce((acc, curr) => acc + (Number(curr.stock) || 0), 0)}
+               </div>
            </div>
 
            {/* Description */}

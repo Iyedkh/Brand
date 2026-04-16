@@ -132,17 +132,29 @@ const ProductDetail = () => {
                 <button className="text-[10px] uppercase tracking-widest underline opacity-60">Size Guide</button>
               </div>
               <div className="grid grid-cols-5 gap-2">
-                {product.sizes.map(size => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`h-12 border text-xs tracking-widest transition-all ${
-                      selectedSize === size ? 'bg-black text-white border-black' : 'hover:border-black text-neutral-400'
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
+                {product.sizes.map(sizeItem => {
+                  const s = typeof sizeItem === 'string' ? sizeItem : sizeItem.size;
+                  const itemStock = typeof sizeItem === 'string' ? product.stock : sizeItem.stock;
+                  const isOutOfStock = itemStock === 0;
+
+                  return (
+                    <button
+                      key={s}
+                      disabled={isOutOfStock}
+                      onClick={() => {
+                         setSelectedSize(s);
+                         setQty(1); // Reset quantity when changing size
+                      }}
+                      className={`h-12 border text-xs tracking-widest transition-all ${
+                        selectedSize === s ? 'bg-black text-white border-black' : 
+                        isOutOfStock ? 'opacity-30 cursor-not-allowed border-neutral-100 line-through' :
+                        'hover:border-black text-neutral-400'
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -151,7 +163,11 @@ const ProductDetail = () => {
                <div className="flex items-center border border-neutral-200 w-fit">
                   <button onClick={() => setQty(Math.max(1, qty-1))} className="p-3 hover:bg-neutral-50"><Minus size={14}/></button>
                   <span className="w-12 text-center text-xs">{qty}</span>
-                  <button onClick={() => setQty(Math.min(product.stock, qty+1))} className="p-3 hover:bg-neutral-50"><Plus size={14}/></button>
+                  <button onClick={() => {
+                     const selectedSizeItem = product.sizes.find(sz => (typeof sz === 'string' ? sz : sz.size) === selectedSize);
+                     const maxStock = typeof selectedSizeItem === 'string' ? product.stock : (selectedSizeItem ? selectedSizeItem.stock : 0);
+                     setQty(Math.min(maxStock, qty+1));
+                  }} className="p-3 hover:bg-neutral-50"><Plus size={14}/></button>
                </div>
 
                <div className="flex space-x-2">

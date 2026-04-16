@@ -61,7 +61,7 @@ const Cart = () => {
                         </button>
                         <span className="w-10 text-center text-[10px]">{item.qty}</span>
                         <button 
-                          onClick={() => addToCart({_id: item.product, ...item}, item.qty + 1, item.size, item.color)} 
+                          onClick={() => addToCart({_id: item.product, ...item}, Math.min(item.countInStock || 99, item.qty + 1), item.size, item.color)} 
                           className="p-2 hover:bg-neutral-50"
                         >
                           <Plus size={12}/>

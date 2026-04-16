@@ -4,12 +4,15 @@ const useCartStore = create((set, get) => ({
   cartItems: JSON.parse(localStorage.getItem('cartItems')) || [],
 
   addToCart: (product, qty, size, color) => {
+    const selectedSizeItem = product.sizes?.find(sz => (typeof sz === 'string' ? sz : sz.size) === size);
+    const maxStock = typeof selectedSizeItem === 'string' ? product.stock : (selectedSizeItem ? selectedSizeItem.stock : product.stock);
+
     const item = {
       product: product._id,
       name: product.name,
       image: product.images[0],
       price: product.price,
-      countInStock: product.stock,
+      countInStock: maxStock,
       qty,
       size,
       color,

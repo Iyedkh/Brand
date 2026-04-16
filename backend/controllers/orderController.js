@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Order = require('../models/orderModel');
+const Product = require('../models/productModel');
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -30,6 +31,28 @@ const addOrderItems = asyncHandler(async (req, res) => {
     });
 
     const createdOrder = await order.save();
+
+    for (const item of orderItems) {
+      const product = await Product.findById(item.product);
+      if (product) {
+        const sizeIndex = product.sizes.findIndex(
+          (s) => (typeof s === 'string' ? s : s.size) === item.size
+        );
+
+        if (sizeIndex !== -1) {
+          if (typeof product.sizes[sizeIndex] === 'string') {
+            product.sizes = product.sizes.map((s) =>
+              typeof s === 'string' ? { size: s, stock: product.stock } : s
+            );
+            product.sizes[sizeIndex].stock = Math.max(0, product.sizes[sizeIndex].stock - item.qty);
+          } else {
+            product.sizes[sizeIndex].stock = Math.max(0, product.sizes[sizeIndex].stock - item.qty);
+          }
+          product.markModified('sizes');
+          await product.save();
+        }
+      }
+    }
 
     res.status(201).json(createdOrder);
   }

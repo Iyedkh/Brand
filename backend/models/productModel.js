@@ -18,6 +18,11 @@ const reviewSchema = mongoose.Schema(
 
 const productSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
     name: {
       type: String,
       required: true,
@@ -39,11 +44,12 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    sizes: {
-      type: [String],
-      required: true,
-      default: ['S', 'M', 'L', 'XL'],
-    },
+    sizes: [
+      {
+        size: { type: String, required: true },
+        stock: { type: Number, required: true, default: 0 },
+      }
+    ],
     colors: {
       type: [String],
       required: true,
@@ -69,6 +75,12 @@ const productSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+productSchema.pre('save', async function () {
+  if (this.sizes && this.sizes.length > 0) {
+    this.stock = this.sizes.reduce((acc, curr) => acc + (Number(curr.stock) || 0), 0);
+  }
+});
 
 const Product = mongoose.model('Product', productSchema);
 
