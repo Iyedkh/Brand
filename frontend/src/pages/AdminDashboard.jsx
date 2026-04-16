@@ -84,10 +84,10 @@ const AdminDashboard = () => {
                  <div key={order._id} className="flex items-center justify-between py-2 border-b border-neutral-50 last:border-0">
                     <div className="flex items-center space-x-4">
                        <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-[10px]">
-                         {order.user?.username ? order.user.username.substring(0, 2).toUpperCase() : 'OA'}
+                         {order.user?.username ? order.user.username?.substring(0, 2).toUpperCase() : 'OA'}
                        </div>
                        <div>
-                          <p className="text-[10px] uppercase tracking-widest">Order #{order._id.substring(0, 8)}</p>
+                          <p className="text-[10px] uppercase tracking-widest">Order #{order._id?.substring(0, 8)}</p>
                           <p className="text-[9px] text-neutral-400">{new Date(order.createdAt).toLocaleDateString()}</p>
                        </div>
                     </div>

@@ -63,11 +63,11 @@ const AdminUsers = () => {
             <tbody>
               {users.map((u) => (
                 <tr key={u._id} className="border-b border-neutral-50 hover:bg-neutral-50 transition-colors">
-                  <td className="p-6 text-xs font-mono text-neutral-500">{u._id.substring(0, 8)}...</td>
+                  <td className="p-6 text-xs font-mono text-neutral-500">{u._id?.substring(0, 8)}...</td>
                   <td className="p-6">
                      <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center text-[10px] font-medium text-neutral-600">
-                           {u.username.substring(0, 2).toUpperCase()}
+                           {u.username?.substring(0, 2).toUpperCase() || 'US'}
                         </div>
                         <span className="text-sm">{u.username}</span>
                      </div>

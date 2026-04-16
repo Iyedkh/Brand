@@ -136,9 +136,9 @@ const AdminOrderDetails = () => {
               
               <div className="space-y-6">
                  {[
-                   { label: 'Payment', status: order.isPaid ? 'PAID' : 'PENDING', sub: order.isPaid ? order.paidAt.substring(0, 10) : order.paymentMethod, active: order.isPaid },
+                   { label: 'Payment', status: order.isPaid ? 'PAID' : 'PENDING', sub: order.isPaid ? order.paidAt?.substring(0, 10) || 'Paid' : order.paymentMethod, active: order.isPaid },
                    { label: 'Shipping', status: (order.status === 'Shipped' || order.status === 'Delivered') ? 'SHIPPED' : 'AWAITING', sub: 'Standard Delivery', active: order.status === 'Shipped' || order.status === 'Delivered' },
-                   { label: 'Delivery', status: order.isDelivered ? 'DELIVERED' : 'IN TRANSIT', sub: order.isDelivered ? order.deliveredAt.substring(0, 10) : 'Estimated 5-7 days', active: order.isDelivered },
+                   { label: 'Delivery', status: order.isDelivered ? 'DELIVERED' : 'IN TRANSIT', sub: order.isDelivered ? order.deliveredAt?.substring(0, 10) || 'Delivered' : 'Estimated 5-7 days', active: order.isDelivered },
                  ].map((step, i) => (
                    <div key={i} className="flex space-x-4 relative">
                       <div className={`mt-1 h-3 w-3 rounded-full border-2 ${step.active ? 'bg-black border-black' : 'bg-transparent border-neutral-200'}`}></div>

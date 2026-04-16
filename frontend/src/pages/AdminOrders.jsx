@@ -87,7 +87,7 @@ const AdminOrders = () => {
                   <td className="px-6 py-4 font-medium text-black">{order.totalPrice.toFixed(2)} TND</td>
                   <td className="px-6 py-4">
                     {order.isPaid ? (
-                       <span className="flex items-center text-emerald-500"><CheckCircle size={14} className="mr-2" /> {order.paidAt.substring(0, 10)}</span>
+                       <span className="flex items-center text-emerald-500"><CheckCircle size={14} className="mr-2" /> {order.paidAt?.substring(0, 10) || 'Paid'}</span>
                     ) : (
                        <span className="flex items-center text-red-400"><X size={14} className="mr-2" /> Not Paid</span>
                     )}
